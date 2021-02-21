@@ -137,10 +137,11 @@ export default {
 }
 </script>
 
-<style>
-  .wrapper{
+<style scoped>
+ .wrapper{
     height: 150px;
     background-color: red;
     overflow: hidden;
   }
-</style>
+</style>>
+ 
