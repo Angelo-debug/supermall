@@ -40,7 +40,7 @@ import GoodsList from 'components/content/goods/GoodsList'
 import Scroll from 'components/common/scroll/Scroll'
 import BackTop from 'components/content/backTop/BackTop'
 
-
+import {itemListenerMixin} from 'common/mixin'
 
 
 export default {
@@ -68,9 +68,11 @@ export default {
       isShowBackTop: false,
       tabOffsetTop: 0,
       isTabFixed:false,
-      saveY: 0
+      saveY: 0,
+      itemImgListener: null
     }
   },
+  mixins: [itemListenerMixin],
   created () {
     //1.请求多个数据
     this.getHomeMultidata();
@@ -82,15 +84,6 @@ export default {
 
   },
   mounted () {
-    //1.图片加载完成的事件监听
-    const refresh = this.debounce(this.$refs.scroll.refresh)
-    this.$bus.$on('itemImgLoad',() => {
-      refresh()
-    })
-
-    //2.获取tabControl的offsetTop
-    //所有的组件都有一个属性$el:用于获取组件中的元素
-    
     
   },
   computed: {
@@ -171,7 +164,11 @@ export default {
     this.$refs.scroll.refresh();
   },
   deactivated () {
+    //1.保存Y值
     this.saveY = this.$refs.scroll.scroll.y;
+
+    //2.取消全局事件的监听
+    this.$bus.$off('itemImgLoad',this.itemImgListener)
   }
 }
 </script>

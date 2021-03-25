@@ -8,7 +8,7 @@
                 <div v-for="(item,index) in titles"
                      class="title-item"
                      :class="{active: index == currentIndex}"
-                     @click="titleSelect(index)"
+                     @click="titleClick(index)"
                      >{{item}}
                  </div>
             </div>
@@ -31,8 +31,9 @@ export default {
         }
     },
     methods: {
-        titleSelect(index){
+        titleClick(index){
             this.currentIndex = index;
+            this.$emit('titleClick',index);
         },
         backClick(){
             this.$router.back();

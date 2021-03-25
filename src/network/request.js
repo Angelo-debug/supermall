@@ -10,7 +10,7 @@ export function request(config){
         //2.axios拦截器
         //请求拦截
         instance.interceptors.request.use(config => {
-            console.log(config)
+            // console.log(config)
             return config
         }, err => {
             // console.log(err)
@@ -18,7 +18,7 @@ export function request(config){
 
         //响应拦截
         instance.interceptors.response.use(config => {
-            console.log(config)
+            // console.log(config)
             return config
         }, err => {
             console.log(err)
